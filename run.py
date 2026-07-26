@@ -23,7 +23,8 @@ def _open_browser() -> None:
 
 
 if __name__ == "__main__":
+    import app as _app
     threading.Thread(target=_open_browser, daemon=True).start()
     print(f"\n  PageWhisper 启动中 → http://{HOST}:{PORT}\n")
     sys.stdout.flush()
-    uvicorn.run("app:app", host=HOST, port=PORT, log_level="info")
+    uvicorn.run(_app.app, host=HOST, port=PORT, log_level="info")

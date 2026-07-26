@@ -6,6 +6,7 @@
   <img src="https://img.shields.io/badge/Python-3.11%2B-blue.svg" alt="Python">
   <img src="https://img.shields.io/badge/FastAPI-0.110%2B-009688.svg" alt="FastAPI">
   <img src="https://img.shields.io/badge/Engine-OpenAI%20Compatible%20%2F%20Google-ff69b4.svg" alt="Engine">
+  <img src="https://img.shields.io/badge/Desktop-Windows%20.exe-brightgreen.svg" alt="Desktop exe">
 </p>
 
 <p align="center">上传英文论文 PDF，AI 智能体自动识别正文、表格、图例，输出<strong>重新排版的中英对照</strong> HTML 与 PDF。</p>
@@ -25,6 +26,7 @@
 - **零成本预览**：无 Key 时自动回退 Google 翻译，开箱即用。
 - **参考文献可开关**：默认保留英文以省 Token，可勾选翻译。
 - **一键导出**：浏览器打印为 PDF，或下载 HTML；服务端亦可用 reportlab 生成 PDF。
+- **桌面版**：可一键打包为单文件 `PageWhisper.exe`（PyInstaller），绿色免安装、双击即用，亦可在 GitHub Releases 获取预编译版。
 
 ---
 
@@ -113,13 +115,30 @@ docker compose up --build
 
 ### 方式三：打包为桌面软件（PyInstaller）
 
-将整个应用封装为单文件可执行程序，免安装、双击运行：
+将整个应用封装为单文件可执行程序（`.exe`），免安装、双击即运行：
 
 ```bash
 pip install pyinstaller
 pyinstaller pagewhisper.spec
-# 产物：dist/PageWhisper(.exe)，双击启动本地服务并自动打开浏览器
+# 产物：dist/PageWhisper.exe —— 双击启动本地服务并自动打开浏览器
 ```
+
+> 💡 **已内置打包配置**：仓库根目录的 `pagewhisper.spec` 已配好 `static` 数据绑定与全部隐藏依赖，
+> 直接用上面的命令即可生成 `dist/PageWhisper.exe`（约 150 MB，单文件、绿色免安装）。
+
+#### 🖥️ 桌面版（预编译 .exe）
+
+不想自己打包？可从 **GitHub Releases** 下载已构建好的 `PageWhisper.exe`：
+
+1. 到仓库 [Releases](https://github.com/hydra-hydra/PageWhisper/releases) 下载 `PageWhisper.exe`；
+2. 双击运行，自动打开浏览器至 <http://127.0.0.1:8000>；
+3. 关闭窗口即退出；翻译产物临时存放在系统临时目录（`pagewhisper_output`）。
+
+> 维护者发布二进制的命令：
+> ```bash
+> pyinstaller pagewhisper.spec --noconfirm
+> gh release upload vX.Y.Z dist/PageWhisper.exe
+> ```
 
 ---
 

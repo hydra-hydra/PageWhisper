@@ -9,6 +9,10 @@ env/
 # Runtime outputs (generated on the fly)
 output/
 
+# PyInstaller build artifacts
+build/
+dist/
+
 # Environment / secrets
 .env
 *.log

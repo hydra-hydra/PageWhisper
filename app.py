@@ -15,8 +15,16 @@ import json
 import uuid
 import time
 import threading
+import tempfile
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# ── 路径兼容：源码模式 vs PyInstaller 冻结模式 ──
+if getattr(sys, "frozen", False):
+    # 冻结后，数据文件（static 等）被解压到 sys._MEIPASS
+    BASE = sys._MEIPASS
+else:
+    BASE = os.path.dirname(os.path.abspath(__file__))
+
+sys.path.insert(0, BASE)
 
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.responses import FileResponse, JSONResponse
@@ -28,12 +36,13 @@ import translate_paper
 import translator
 import html_builder
 
-BASE = os.path.dirname(os.path.abspath(__file__))
-OUTPUT = os.path.join(BASE, "output")
+STATIC_DIR = os.path.join(BASE, "static")
+# 运行产物写到系统临时目录，避免冻结后 _MEIPASS 只读
+OUTPUT = os.path.join(tempfile.gettempdir(), "pagewhisper_output")
 os.makedirs(OUTPUT, exist_ok=True)
 
 app = FastAPI(title="PDF 中英对照翻译工具")
-app.mount("/static", StaticFiles(directory=os.path.join(BASE, "static")), name="static")
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 app.mount("/output", StaticFiles(directory=OUTPUT), name="output")
 
 # Job state store

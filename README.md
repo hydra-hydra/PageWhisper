@@ -13,7 +13,7 @@
 
 ---
 
-## ✨ 特性（Features）
+## 特性（Features）
 
 - **中英对照，而非纯中文**：每段原文（灰）+ 中文译文（黑）逐段对照，便于核验。
 - **AI 智能体抽取**：`智能抽取` 模式调用 LLM 识别正文 / 表格 / 图例 / 元数据，自适应不同期刊排版，告别"套正则"的脆弱方案。
@@ -30,9 +30,9 @@
 
 ---
 
-## 📊 Benchmark（性能实测 / 高亮）
+## Benchmark（性能实测 / 高亮）
 
-> ### 🚀 用 **DeepSeek v4 flash** 翻译一篇 2025 年发表于 *Science* 的论文，全文耗时约 **4 分 30 秒**，Token 费用约 **¥0.1（官网价）**。
+> ### 用 **DeepSeek v4 flash** 翻译一篇 2025 年发表于 *Science* 的论文，全文耗时约 **4 分 30 秒**，Token 费用约 **¥0.1（官网价）**。
 >
 > | 项目 | 内容 |
 > | --- | --- |
@@ -43,11 +43,11 @@
 > | 耗时 | **≈ 4 分 30 秒** |
 > | Token 费用 | **≈ ¥0.10**（按 DeepSeek 官网价格估算） |
 >
-> 结论：一篇顶级期刊长文的全文中英对照翻译，成本可压到**一角钱**级别——几乎可视为"免费"的文献精读助手。
+
 
 ---
 
-## 🏗️ 架构（Architecture）
+## 架构（Architecture）
 
 ```
             ┌─────────────── 浏览器 (static/index.html) ───────────────┐
@@ -82,7 +82,7 @@
 
 ---
 
-## 🚀 快速开始（Quick Start）
+## 快速开始（Quick Start）
 
 ### 方式一：桌面版（预编译 .exe，推荐 ⭐ 零安装）
 
@@ -133,7 +133,7 @@ pyinstaller pagewhisper.spec
 # 产物：dist/PageWhisper.exe —— 双击启动本地服务并自动打开浏览器
 ```
 
-> 💡 **已内置打包配置**：仓库根目录的 `pagewhisper.spec` 已配好 `static` 数据绑定与全部隐藏依赖，
+> **已内置打包配置**：仓库根目录的 `pagewhisper.spec` 已配好 `static` 数据绑定与全部隐藏依赖，
 > 直接用上面的命令即可生成 `dist/PageWhisper.exe`（约 150 MB，单文件、绿色免安装）。
 
 > 维护者发布二进制的命令：
@@ -144,7 +144,7 @@ pyinstaller pagewhisper.spec
 
 ---
 
-## 🔧 配置（Configuration）
+## 配置（Configuration）
 
 网页端设置项：
 
@@ -163,7 +163,7 @@ pyinstaller pagewhisper.spec
 
 ---
 
-## 📡 API 文档（API）
+## API 文档（API）
 
 | 方法 | 路径 | 说明 |
 | --- | --- | --- |
@@ -174,7 +174,7 @@ pyinstaller pagewhisper.spec
 
 ---
 
-## 🧩 工作原理（How it works）
+## 工作原理（How it works）
 
 1. **抽取**：PyMuPDF 以 `get_text("dict")` 提取文本块与图片；启发式过滤页眉/页脚/期刊名；字体大小相对正文字号判定标题层级；支持 `.B` / `-Bold` / `Bold` 等多种粗体命名。
 2. **智能抽取（可选）**：将段落交给 LLM 分类为 正文 / 标题 / 图例 / 表格 / 元数据，并用图像包围盒过滤图内标签（如 `Gapdh 37`），避免污染译文。
@@ -185,7 +185,7 @@ pyinstaller pagewhisper.spec
 
 ---
 
-## 📁 项目结构（Project Structure）
+## 项目结构（Project Structure）
 
 ```
 PageWhisper/
@@ -207,7 +207,7 @@ PageWhisper/
 
 ---
 
-## 🗺️ 路线图（Roadmap）
+## 路线图（Roadmap）
 
 - [ ] 批量 PDF 队列与并发
 - [ ] 术语表（glossary）可视化编辑
@@ -216,18 +216,17 @@ PageWhisper/
 
 ---
 
-## 📄 许可证（License）
+## 许可证（License）
 
 [MIT](LICENSE) © 2026 hydra-hydra
 
 ---
 
-## 🙏 致谢（Acknowledgements）
+## 致谢（Acknowledgements）
 
-- 翻译能力由 [DeepSeek](https://www.deepseek.com/) / OpenAI 兼容端点 / Google 翻译 提供。
 - PDF 解析基于 [PyMuPDF](https://github.com/pymupdf/PyMuPDF)。
 - PDF 生成基于 [ReportLab](https://www.reportlab.com/)。
 
 ---
 
-<p align="center">PageWhisper · 让英文文献阅读成本降到一角钱级别</p>
+<p align="center">PageWhisper · 让英文文献阅读更简单</p>

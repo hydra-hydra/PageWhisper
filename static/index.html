@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PageWhisper — PDF 中英对照翻译</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div>
+        <h1>PageWhisper <span class="brand-sub">PDF 中英对照翻译</span></h1>
+        <p>上传英文论文 PDF，AI 智能体识别正文/表格/图例，输出中英对照的排版级翻译</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="layout">
+  <section class="panel">
+    <div id="drop" class="drop">
+      <input type="file" id="file" accept="application/pdf" hidden>
+      <p class="drop-hint">点击选择 PDF，或拖放到此区域</p>
+      <button id="pick" type="button" class="btn-outline">选择文件</button>
+      <div id="fname" class="fname"></div>
+    </div>
+
+    <div class="settings">
+      <h2 class="settings-title">翻译设置</h2>
+
+      <label class="field">
+        <span>翻译模式</span>
+        <select id="translate_mode">
+          <option value="pipeline">标准翻译 — 抽文→分批翻译→排版（快，省 Token）</option>
+          <option value="oneshot">AI Agent 智能翻译 — 全文交给 AI 智能体，一次性输出高质量双语对照（需 Key）</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span>翻译引擎</span>
+        <select id="engine">
+          <option value="auto">自动（有 Key 用 LLM，无 Key 用 Google）</option>
+          <option value="google">Google 翻译（免费，免 Key）</option>
+          <option value="openai">LLM（OpenAI 兼容）</option>
+        </select>
+      </label>
+
+      <div class="field">
+        <span>API Key</span>
+        <div class="pw-row">
+          <input id="api_key" type="password" placeholder="sk-..." autocomplete="off">
+          <button type="button" id="toggle-key" class="mini">显示</button>
+        </div>
+      </div>
+
+      <label class="field">
+        <span>Base URL</span>
+        <input id="base_url" placeholder="如：https://api.deepseek.com">
+      </label>
+
+      <label class="field">
+        <span>模型</span>
+        <input id="model" placeholder="如：deepseek-v4-flash">
+      </label>
+
+      <label class="check"><input id="keep_original" type="checkbox" checked> 中英对照（保留原文）</label>
+      <label class="check"><input id="smart_mode" type="checkbox"> 智能抽取 — LLM 识别正文/图例/元数据（适应不同期刊排版）</label>
+      <label class="check"><input id="translate_refs" type="checkbox"> 翻译参考文献</label>
+    </div>
+
+    <button id="go" class="primary" disabled>开始翻译</button>
+
+    <div id="progress-card" class="progress-card" hidden>
+      <div class="progress-bar-bg">
+        <div id="progress-fill" class="progress-fill" style="width:0%"></div>
+      </div>
+      <div class="progress-info">
+        <span id="stage-text">准备中...</span>
+        <span id="percent-text">0%</span>
+      </div>
+      <div id="elapsed-text" class="elapsed"></div>
+    </div>
+
+    <div id="token-card" class="token-card" hidden>
+      <span id="token-detail"></span>
+    </div>
+
+    <div id="status" class="status"></div>
+  </section>
+
+  <section class="preview">
+    <div class="toolbar" id="toolbar" hidden>
+      <span id="toolbar-info" class="toolbar-info"></span>
+      <button id="print" class="tool-btn">打印 PDF</button>
+      <a id="dl-html" class="tool-btn" download>下载 HTML</a>
+    </div>
+    <iframe id="viewer" title="翻译预览"></iframe>
+    <div id="empty" class="empty">
+      <p>翻译完成后在此预览</p>
+      <p class="empty-hint">上传英文 PDF → 选择翻译模式 → 点击开始</p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>PageWhisper — AI-powered PDF bilingual translation</span>
+    <a href="https://github.com/hydra-hydra" target="_blank" rel="noopener" class="github-link">
+      <svg class="github-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      hydra-hydra
+    </a>
+  </div>
+</footer>
+<script src="/static/app.js"></script>
+</body>
+</html>

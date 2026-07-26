@@ -84,7 +84,17 @@
 
 ## 🚀 快速开始（Quick Start）
 
-### 方式一：本地运行（推荐个人使用）
+### 方式一：桌面版（预编译 .exe，推荐 ⭐ 零安装）
+
+不想配置环境？直接下载双击即用，最适合大多数用户：
+
+1. 到仓库 [Releases](https://github.com/hydra-hydra/PageWhisper/releases) 下载 `PageWhisper.exe`；
+2. **双击运行**，自动打开浏览器至 <http://127.0.0.1:8000>；
+3. 关闭窗口即退出；翻译产物临时存放在系统临时目录（`pagewhisper_output`）。
+
+> 单文件、绿色免安装（约 150 MB），无需 Python、无需联网配置。
+
+### 方式二：本地运行（Python 3.11+，适合开发 / 自托管）
 
 **前置条件**：Python 3.11+
 
@@ -106,16 +116,16 @@ python run.py
 
 浏览器打开 <http://127.0.0.1:8000> 即可使用。
 
-### 方式二：Docker（推荐服务器 / 干净环境）
+### 方式三：Docker（推荐服务器 / 干净环境）
 
 ```bash
 docker compose up --build
 # 访问 http://localhost:8000
 ```
 
-### 方式三：打包为桌面软件（PyInstaller）
+### 方式四：自行打包为桌面软件（PyInstaller）
 
-将整个应用封装为单文件可执行程序（`.exe`），免安装、双击即运行：
+把整个应用封装成单文件可执行程序（`.exe`），免安装、双击即运行：
 
 ```bash
 pip install pyinstaller
@@ -125,14 +135,6 @@ pyinstaller pagewhisper.spec
 
 > 💡 **已内置打包配置**：仓库根目录的 `pagewhisper.spec` 已配好 `static` 数据绑定与全部隐藏依赖，
 > 直接用上面的命令即可生成 `dist/PageWhisper.exe`（约 150 MB，单文件、绿色免安装）。
-
-#### 🖥️ 桌面版（预编译 .exe）
-
-不想自己打包？可从 **GitHub Releases** 下载已构建好的 `PageWhisper.exe`：
-
-1. 到仓库 [Releases](https://github.com/hydra-hydra/PageWhisper/releases) 下载 `PageWhisper.exe`；
-2. 双击运行，自动打开浏览器至 <http://127.0.0.1:8000>；
-3. 关闭窗口即退出；翻译产物临时存放在系统临时目录（`pagewhisper_output`）。
 
 > 维护者发布二进制的命令：
 > ```bash

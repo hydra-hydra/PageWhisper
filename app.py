@@ -76,7 +76,7 @@ def _run_translation(job: str, work: str, figdir: str, pdf_path: str,
             html = translate_paper.translate_paper(
                 pdf_path, api_key, base_url=base_url, model=model,
             )
-            _update("LLM 翻译完成，正在提��图片...", 80)
+            _update("LLM 翻译完成，正在提取图片...", 80)
 
             # Extract figures
             images = []
